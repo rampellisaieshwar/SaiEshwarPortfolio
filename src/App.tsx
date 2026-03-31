@@ -23,6 +23,7 @@ import { BentoGrid } from './components/BentoGrid';
 import { Timeline } from './components/Timeline';
 import { Terminal } from './components/Terminal';
 import me9 from './media/me9.png';
+import Resume from './media/Resume.pdf';
 
 const projects = [
   {
@@ -418,7 +419,7 @@ export default function App() {
         onClose={() => setShowResume(false)}
         title="Professional Resume"
         logs={resumeLogs}
-        downloadUrl="#" // Replace with actual resume PDF link
+        downloadUrl={Resume}
         downloadFileName="Rampelli_Sai_Eshwar_Resume.pdf"
       />
 

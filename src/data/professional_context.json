@@ -1,81 +1,225 @@
 {
   "profile": {
     "name": "Rampelli Sai Eshwar",
-    "role": "Applied AI & Backend Developer",
+    "role": "AI Systems Engineer (LLMs, Computer Vision, Distributed Systems)",
     "location": "Hyderabad, India",
-    "education": [
-      {
-        "institution": "IIT Ropar",
-        "major": "AI",
-        "status": "Current"
-      },
-      {
-        "institution": "KITS",
-        "major": "B.Tech"
-      }
-    ],
-    "experience": [
-      {
-        "company": "0101 Digitall",
-        "role": "AIML Intern",
-        "description": "Internship spotlighting agentic systems and CV pipelines."
-      }
-    ]
+    "tagline": "Designs autonomous AI systems using multi-agent orchestration, real-time pipelines, and scalable backend architectures.",
+    "availability": "Available for AI Engineering Roles"
   },
   "projects": [
     {
       "title": "Barney",
-      "subtitle": "Multi-Agent Orchestration",
-      "description": "Production-grade multi-agent platform that breaks complex workflows into specialized, collaborative units.",
-      "tech": ["LangGraph", "Python", "Multi-Agent"],
+      "type": "Multi-Agent AI Orchestration System",
+      "problem_statement": "Single-LLM systems struggle with complex multi-step tasks due to lack of planning, memory, and tool integration.",
+      "solution": "Built a modular multi-agent system that decomposes tasks, assigns them to specialized agents, and executes them using tools and memory-aware reasoning.",
+      "system_design": {
+        "input": [
+          "User query",
+          "Conversation history",
+          "External context (documents, APIs)"
+        ],
+        "processing_pipeline": [
+          "1. Interpret user intent using LLM",
+          "2. Decompose task into subtasks",
+          "3. Select appropriate agents for each subtask",
+          "4. Retrieve context using vector search (RAG)",
+          "5. Execute tools (APIs, DB queries, functions)",
+          "6. Run tasks in parallel or sequential flow",
+          "7. Aggregate intermediate outputs",
+          "8. Generate final response"
+        ],
+        "output": [
+          "Final structured response",
+          "Tool execution results",
+          "Updated memory/context"
+        ]
+      },
+      "decision_logic": [
+        "Agent selection based on task type (reasoning vs retrieval vs execution)",
+        "Dynamic tool selection using LLM reasoning",
+        "Fallback handling when tool fails or returns incomplete data",
+        "Context prioritization using semantic similarity"
+      ],
+      "architecture_components": {
+        "orchestrator": "Controls task flow, decomposition, and coordination between agents",
+        "agents": [
+          "Reasoning Agent (planning and decomposition)",
+          "Retrieval Agent (semantic search)",
+          "Execution Agent (tool usage)"
+        ],
+        "memory": "Vector database for semantic retrieval and persistent context",
+        "tool_layer": "Pluggable tools (APIs, DB, external services)",
+        "execution_engine": "Async pipeline supporting parallel and sequential tasks"
+      },
+      "data_flow": [
+        "User Input → Orchestrator → Agents → Tools/Memory → Aggregation → Response"
+      ],
+      "constraints_and_tradeoffs": [
+        "Latency vs accuracy in multi-step reasoning",
+        "Token cost due to multi-agent communication",
+        "Consistency of memory retrieval vs speed",
+        "Complex orchestration vs maintainability"
+      ],
+      "failure_handling": [
+        "Retry logic for tool failures",
+        "Fallback to LLM-only response when tools fail",
+        "Partial result aggregation if some agents fail"
+      ],
+      "observability": [
+        "Logging agent decisions",
+        "Tracking tool calls",
+        "Monitoring execution latency"
+      ],
+      "tech": [
+        "LangGraph",
+        "Python",
+        "FastAPI",
+        "Redis",
+        "PostgreSQL",
+        "Vector Databases",
+        "Docker"
+      ],
       "status": "Under Progress"
     },
     {
-      "title": "TelePort",
-      "subtitle": "Android TV Launcher",
-      "description": "Universal launcher hub for OTT live TV channels with deep link optimization.",
-      "tech": ["Android TV", "Deep Linking", "UI/UX"]
-    },
-    {
       "title": "Gravity Edits",
-      "subtitle": "Autonomous Video AI",
-      "description": "Two-Stage AI architecture (Inspector-Director) for natural language video editing.",
-      "tech": ["Gemini 2.5 Pro", "FastAPI", "FFmpeg"]
+      "type": "AI Video Editing System",
+      "problem_statement": "Manual video editing is time-consuming and requires technical expertise.",
+      "solution": "Developed a two-stage AI pipeline (Inspector-Director) to convert natural language prompts into executable video editing workflows.",
+      "system_design": {
+        "input": [
+          "User prompt",
+          "Video file"
+        ],
+        "processing_pipeline": [
+          "1. Inspector analyzes video (scene detection, objects)",
+          "2. Director converts user intent into structured editing plan",
+          "3. Generate editing instructions",
+          "4. Execute edits using FFmpeg"
+        ],
+        "output": [
+          "Edited video",
+          "Structured editing steps"
+        ]
+      },
+      "decision_logic": [
+        "Mapping user intent to editing operations",
+        "Selecting relevant video segments",
+        "Determining edit sequence"
+      ],
+      "constraints_and_tradeoffs": [
+        "Processing time for large videos",
+        "Accuracy of scene understanding",
+        "Balancing automation vs user control"
+      ],
+      "tech": [
+        "Gemini 2.5 Pro",
+        "FastAPI",
+        "FFmpeg"
+      ],
+      "status": "Completed"
     },
     {
       "title": "VirBoard",
-      "subtitle": "CV Virtual Blackboard",
-      "description": "Real-time virtual writing system using hand gesture recognition and computer vision.",
-      "tech": ["OpenCV", "Mediapipe", "Python"]
+      "type": "Real-Time Computer Vision Interaction System",
+      "problem_statement": "Traditional input devices limit natural interaction for writing and drawing.",
+      "solution": "Built a gesture-controlled virtual writing system using real-time hand tracking.",
+      "system_design": {
+        "input": [
+          "Webcam video stream"
+        ],
+        "processing_pipeline": [
+          "1. Detect hand landmarks using MediaPipe",
+          "2. Track finger positions",
+          "3. Map gestures to drawing coordinates",
+          "4. Render strokes on virtual canvas"
+        ],
+        "output": [
+          "Real-time drawing interface"
+        ]
+      },
+      "decision_logic": [
+        "Gesture classification based on finger positions",
+        "Noise filtering for stable tracking"
+      ],
+      "constraints_and_tradeoffs": [
+        "Latency vs accuracy in tracking",
+        "Sensitivity to lighting conditions",
+        "Hardware limitations"
+      ],
+      "tech": [
+        "OpenCV",
+        "MediaPipe",
+        "Python"
+      ],
+      "status": "Completed"
     },
     {
       "title": "VidLingo",
-      "subtitle": "AI Subtitle Engine",
-      "description": "Automated subtitle generation and multi-language translation system with timeline synchronization.",
-      "tech": ["Google Cloud", "Speech-to-Text", "Translation API"]
-    }
-  ],
-  "internship_projects": [
-    {
-      "title": "Requirements Agent",
-      "company": "0101 Digitall",
-      "description": "Converts unstructured client briefs into Jira-ready user stories and requirements.",
-      "tech": ["LangChain", "Python", "LLMs"]
+      "type": "Speech Recognition + Translation System",
+      "problem_statement": "Manual subtitle creation is slow and does not scale across languages.",
+      "solution": "Built an automated pipeline for subtitle generation, translation, and synchronization.",
+      "system_design": {
+        "input": [
+          "Audio or video file"
+        ],
+        "processing_pipeline": [
+          "1. Convert speech to text",
+          "2. Generate timestamps",
+          "3. Translate text into target language",
+          "4. Synchronize subtitles with timeline"
+        ],
+        "output": [
+          "Subtitle file (SRT)",
+          "Multi-language subtitles"
+        ]
+      },
+      "decision_logic": [
+        "Language detection",
+        "Translation model selection",
+        "Timestamp alignment strategy"
+      ],
+      "constraints_and_tradeoffs": [
+        "Accuracy vs speed in transcription",
+        "Translation quality vs cost",
+        "Synchronization precision"
+      ],
+      "tech": [
+        "Google Cloud Speech-to-Text",
+        "Translation API"
+      ],
+      "status": "Completed"
     },
     {
-      "title": "Horse Tracking",
-      "company": "0101 Digitall",
-      "description": "Computer vision system for real-time movement analysis and training feedback.",
-      "tech": ["YOLO", "OpenCV", "PyTorch"]
+      "title": "TelePort",
+      "type": "Android TV Aggregation Platform",
+      "problem_statement": "Fragmented OTT platforms make content discovery inefficient.",
+      "solution": "Created a unified Android TV launcher aggregating multiple OTT services with deep link optimization.",
+      "system_design": {
+        "input": [
+          "User navigation input"
+        ],
+        "processing_pipeline": [
+          "1. Fetch content metadata",
+          "2. Resolve deep links",
+          "3. Render UI for TV interface"
+        ],
+        "output": [
+          "Unified content dashboard",
+          "Direct playback navigation"
+        ]
+      },
+      "constraints_and_tradeoffs": [
+        "Handling inconsistent deep link formats",
+        "UI performance on TV devices",
+        "Content aggregation latency"
+      ],
+      "tech": [
+        "Android TV",
+        "Deep Linking",
+        "UI/UX"
+      ],
+      "status": "Under Progress"
     }
-  ],
-  "expertise": [
-    "AI Engineering",
-    "Computer Vision",
-    "Backend Development",
-    "LangChain",
-    "YOLO",
-    "FastAPI",
-    "FFmpeg"
   ]
 }

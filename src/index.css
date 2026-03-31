@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-obsidian: #030303;
+  --color-electric-blue: #00D2FF;
+  --color-deep-violet: #9D50BB;
+  --color-gemini-blue: #4285F4;
+  --color-gemini-purple: #9B72CB;
+  --color-gemini-pink: #D96570;
+}
+
+@layer base {
+  body {
+    @apply bg-obsidian text-white font-sans antialiased selection:bg-electric-blue/30;
+  }
+}
+
+.glass {
+  @apply backdrop-blur-2xl bg-white/[0.03] border border-white/[0.08];
+}
+
+.glass-hover {
+  @apply hover:bg-white/[0.06] hover:border-white/[0.15] transition-all duration-500;
+}
+
+.gemini-gradient {
+  background: linear-gradient(135deg, var(--color-gemini-blue), var(--color-gemini-purple), var(--color-gemini-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stitch-line {
+  @apply absolute bg-gradient-to-b from-electric-blue/20 to-transparent w-px;
+}
+
+.node-dot {
+  @apply absolute w-2 h-2 rounded-full bg-electric-blue shadow-[0_0_10px_rgba(0,210,255,0.8)];
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.terminal-glow {
+  box-shadow: inset 0 0 20px rgba(0, 210, 255, 0.05), 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+

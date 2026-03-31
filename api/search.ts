@@ -1,7 +1,7 @@
 import { Groq } from 'groq-sdk';
 
 const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
+  apiKey: process.env.GROQ_API_KEY || '',
 });
 
 const professionalContext = {
@@ -235,6 +235,15 @@ export default async function handler(req: any, res: any) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  // 1. Check for API Key
+  if (!process.env.GROQ_API_KEY) {
+    console.error('MISSING_API_KEY: GROQ_API_KEY is not defined in Vercel environment variables.');
+    return res.status(500).json({
+      error: 'AI System Offline',
+      details: 'GROQ_API_KEY is missing from server environment.'
+    });
+  }
+
   const { query } = req.body;
 
   if (!query) {
@@ -271,7 +280,15 @@ export default async function handler(req: any, res: any) {
     const responseText = chatCompletion.choices[0]?.message?.content || "I couldn't generate a response.";
     return res.status(200).json({ response: responseText });
   } catch (error: any) {
-    console.error('Groq API Error:', error);
-    return res.status(500).json({ error: 'Failed to process search query' });
+    console.error('Groq API Error Details:', {
+      message: error.message,
+      stack: error.stack,
+      status: error.status,
+      name: error.name
+    });
+    return res.status(500).json({
+      error: 'Failed to process search query',
+      details: error.message
+    });
   }
 }

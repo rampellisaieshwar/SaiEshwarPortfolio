@@ -40,12 +40,15 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose })
         body: JSON.stringify({ query }),
       });
 
-      if (!response.ok) throw new Error('Search failed');
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.details || errorData.error || 'Search failed');
+      }
 
       const data = await response.json();
       setResult(data.response);
-    } catch (err) {
-      setError('System connection interrupted. Please try again.');
+    } catch (err: any) {
+      setError(err.message || 'System connection interrupted. Please try again.');
       console.error(err);
     } finally {
       setIsLoading(false);

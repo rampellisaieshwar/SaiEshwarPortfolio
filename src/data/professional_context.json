@@ -1,0 +1,81 @@
+{
+  "profile": {
+    "name": "Rampelli Sai Eshwar",
+    "role": "Applied AI & Backend Developer",
+    "location": "Hyderabad, India",
+    "education": [
+      {
+        "institution": "IIT Ropar",
+        "major": "AI",
+        "status": "Current"
+      },
+      {
+        "institution": "KITS",
+        "major": "B.Tech"
+      }
+    ],
+    "experience": [
+      {
+        "company": "0101 Digitall",
+        "role": "AIML Intern",
+        "description": "Internship spotlighting agentic systems and CV pipelines."
+      }
+    ]
+  },
+  "projects": [
+    {
+      "title": "Barney",
+      "subtitle": "Multi-Agent Orchestration",
+      "description": "Production-grade multi-agent platform that breaks complex workflows into specialized, collaborative units.",
+      "tech": ["LangGraph", "Python", "Multi-Agent"],
+      "status": "Under Progress"
+    },
+    {
+      "title": "TelePort",
+      "subtitle": "Android TV Launcher",
+      "description": "Universal launcher hub for OTT live TV channels with deep link optimization.",
+      "tech": ["Android TV", "Deep Linking", "UI/UX"]
+    },
+    {
+      "title": "Gravity Edits",
+      "subtitle": "Autonomous Video AI",
+      "description": "Two-Stage AI architecture (Inspector-Director) for natural language video editing.",
+      "tech": ["Gemini 2.5 Pro", "FastAPI", "FFmpeg"]
+    },
+    {
+      "title": "VirBoard",
+      "subtitle": "CV Virtual Blackboard",
+      "description": "Real-time virtual writing system using hand gesture recognition and computer vision.",
+      "tech": ["OpenCV", "Mediapipe", "Python"]
+    },
+    {
+      "title": "VidLingo",
+      "subtitle": "AI Subtitle Engine",
+      "description": "Automated subtitle generation and multi-language translation system with timeline synchronization.",
+      "tech": ["Google Cloud", "Speech-to-Text", "Translation API"]
+    }
+  ],
+  "internship_projects": [
+    {
+      "title": "Requirements Agent",
+      "company": "0101 Digitall",
+      "description": "Converts unstructured client briefs into Jira-ready user stories and requirements.",
+      "tech": ["LangChain", "Python", "LLMs"]
+    },
+    {
+      "title": "Horse Tracking",
+      "company": "0101 Digitall",
+      "description": "Computer vision system for real-time movement analysis and training feedback.",
+      "tech": ["YOLO", "OpenCV", "PyTorch"]
+    }
+  ],
+  "expertise": [
+    "AI Engineering",
+    "Computer Vision",
+    "Backend Development",
+    "LangChain",
+    "YOLO",
+    "FastAPI",
+    "FFmpeg"
+  ]
+}

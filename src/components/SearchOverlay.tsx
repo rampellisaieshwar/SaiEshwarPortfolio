@@ -9,6 +9,9 @@ interface SearchOverlayProps {
 
 export const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
   const [query, setQuery] = useState('');
+  const [result, setResult] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -16,14 +19,37 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose })
       setTimeout(() => inputRef.current?.focus(), 100);
     } else {
       setQuery('');
+      setResult('');
+      setIsLoading(false);
+      setError(null);
     }
   }, [isOpen]);
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!query.trim()) return;
-    // LLM Integration placeholder
-    console.log('Searching for:', query);
+    if (!query.trim() || isLoading) return;
+
+    setIsLoading(true);
+    setError(null);
+    setResult('');
+
+    try {
+      const response = await fetch('/api/search', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query }),
+      });
+
+      if (!response.ok) throw new Error('Search failed');
+
+      const data = await response.json();
+      setResult(data.response);
+    } catch (err) {
+      setError('System connection interrupted. Please try again.');
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -56,14 +82,32 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose })
                 </div>
                 <div>
                   <h3 className="text-sm font-mono text-white/40 uppercase tracking-widest mb-2">System Intelligence</h3>
-                  <div className="text-white/80 leading-relaxed">
-                    {query.length > 0 ? (
+                  <div className="text-white/80 leading-relaxed max-h-[40vh] overflow-y-auto no-scrollbar">
+                    {isLoading ? (
                       <div className="space-y-4">
-                        <p className="animate-pulse">Analyzing query: "{query}"...</p>
-                        <p className="text-sm text-white/40 italic">LLM integration pending. This panel will display real-time insights from your professional data.</p>
+                        <p className="animate-pulse flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-electric-blue animate-ping" />
+                          Analyzing professional query: "{query}"...
+                        </p>
+                        <div className="h-4 w-3/4 bg-white/5 rounded animate-pulse" />
+                        <div className="h-4 w-1/2 bg-white/5 rounded animate-pulse" />
                       </div>
+                    ) : error ? (
+                      <p className="text-red-400/80 font-mono text-sm">{error}</p>
+                    ) : result ? (
+                      <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="prose prose-invert prose-sm"
+                      >
+                        {result.split('\n').map((line, i) => (
+                          <p key={i} className={line.startsWith('#') ? 'font-bold text-electric-blue mt-4' : 'mb-2'}>
+                            {line}
+                          </p>
+                        ))}
+                      </motion.div>
                     ) : (
-                      <p>Awaiting input...</p>
+                      <p className="text-white/20 italic">Press enter to initialize intelligence sequence...</p>
                     )}
                   </div>
                 </div>

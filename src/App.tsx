@@ -16,12 +16,15 @@ import {
   Activity,
   Zap,
   X,
-  Lock
+  Lock,
+  Search,
+  Sparkles
 } from 'lucide-react';
 import { Background } from './components/Background';
 import { BentoGrid } from './components/BentoGrid';
 import { Timeline } from './components/Timeline';
 import { Terminal } from './components/Terminal';
+import { SearchOverlay } from './components/SearchOverlay';
 import me9 from './media/me9.png';
 import Resume from './media/Resume.pdf';
 
@@ -160,12 +163,23 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
   const [showResume, setShowResume] = useState(false);
   const [showInternshipSpotlight, setShowInternshipSpotlight] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setShowSearch(true);
+      }
+    };
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
 
   return (
@@ -197,6 +211,12 @@ export default function App() {
             <a href="#experience" className="text-sm font-medium hover:text-electric-blue transition-colors">Timeline</a>
             <div className="w-px h-4 bg-white/10" />
             <div className="flex gap-4">
+              <button 
+                onClick={() => setShowSearch(true)}
+                className="text-white/50 hover:text-electric-blue transition-colors"
+              >
+                <Search size={18} />
+              </button>
               <a href="https://github.com/rampellisaieshwar" target="_blank" className="text-white/50 hover:text-white transition-colors"><Github size={18} /></a>
               <a href="https://linkedin.com/in/saieshwarrampelli" target="_blank" className="text-white/50 hover:text-white transition-colors"><Linkedin size={18} /></a>
             </div>
@@ -360,7 +380,15 @@ export default function App() {
           <div className="node-dot left-1/2 top-24 -translate-x-1/2" />
           
           <div className="text-center mb-20">
-            <h2 className="text-4xl font-display font-bold mb-4">Professional Journey</h2>
+            <div className="flex items-center justify-center gap-4 mb-4">
+              <h2 className="text-4xl font-display font-bold">Professional Journey</h2>
+              <button 
+                onClick={() => setShowSearch(true)}
+                className="p-2 rounded-full glass hover:bg-white/10 transition-all text-electric-blue/60"
+              >
+                <Search size={20} />
+              </button>
+            </div>
             <p className="text-white/40">From academic excellence at IIT Ropar to industry impact.</p>
           </div>
           <Timeline onExperienceClick={(company) => {
@@ -404,6 +432,12 @@ export default function App() {
 
       {/* Modals & Overlays (Outside the blurred wrapper) */}
       
+      {/* Search Overlay */}
+      <SearchOverlay 
+        isOpen={showSearch} 
+        onClose={() => setShowSearch(false)} 
+      />
+
       {/* Terminal Modal */}
       <Terminal 
         isOpen={!!selectedProject}

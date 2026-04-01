@@ -10,7 +10,102 @@ const professionalContext = {
     "role": "AI Systems Engineer (LLMs, Computer Vision, Distributed Systems)",
     "location": "Hyderabad, India",
     "tagline": "Designs autonomous AI systems using multi-agent orchestration, real-time pipelines, and scalable backend architectures.",
-    "availability": "Available for AI Engineering Roles"
+    "availability": "Available for AI Engineering Roles",
+    "summary": "AI/ML Engineer specializing in LLM-driven systems, multi-agent orchestration, and real-time computer vision pipelines. Experienced in building production-grade AI applications including requirement-generation agents, video intelligence systems, and distributed AI architectures with strong focus on scalability, reliability, and optimization."
+  },
+  "experience": [
+    {
+      "role": "AI/ML Engineer Intern",
+      "company": "0101 Digitall",
+      "duration": "Dec 2024 – Mar 2025",
+      "work": [
+        "Built a Requirements Agent using LangChain that converts ambiguous client ideas into structured software requirements (user stories, acceptance criteria).",
+        "Developed a real-time horse movement analysis system using computer vision with visual overlays for training feedback.",
+        "Optimized deep learning models for real-time inference, improving latency and stability in video processing pipelines."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Minor in Artificial Intelligence",
+      "institution": "Indian Institute of Technology (IIT), Ropar",
+      "duration": "Jan 2025 – Jan 2026",
+      "details": [
+        "Focused on AI systems, machine learning theory, and applied deep learning.",
+        "Worked on real-world AI projects involving computer vision and intelligent systems."
+      ]
+    },
+    {
+      "degree": "Bachelor of Technology (B.Tech)",
+      "institution": "Kamala Institute of Technology and Science",
+      "duration": "Aug 2020 – Jul 2024",
+      "details": [
+        "Major in Computer Science and Engineering.",
+        "Built foundational knowledge in data structures, algorithms, and system design."
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Full Stack Web Development Hackathon (48-Hour Challenge)",
+      "provider": "Brainovision",
+      "type": "Hackathon"
+    },
+    {
+      "name": "Analyzing and Visualizing Data with Microsoft Power BI",
+      "provider": "Skill Nation",
+      "type": "Data Analysis"
+    },
+    {
+      "name": "Linux Fundamentals & Command Line Basics",
+      "provider": "Cybrary",
+      "type": "System Administration"
+    }
+  ],
+  "skills": {
+    "technical": {
+      "ai_ml": [
+        "Deep Learning (CNNs, Transfer Learning, Fine-tuning, Quantization)",
+        "Agent-based Systems (LangChain, Multi-Agent Orchestration)",
+        "Prompt Engineering",
+        "Model Optimization"
+      ],
+      "computer_vision": [
+        "Object Detection (YOLO, SSD)",
+        "Real-time Video Processing",
+        "OpenCV, MediaPipe"
+      ],
+      "frameworks_tools": [
+        "PyTorch",
+        "TensorFlow",
+        "FastAPI",
+        "Django",
+        "LangGraph",
+        "FFmpeg",
+        "Docker",
+        "Redis",
+        "PostgreSQL",
+        "Vector Databases"
+      ],
+      "programming": [
+        "Python",
+        "SQL"
+      ],
+      "core_concepts": [
+        "Data Structures & Algorithms",
+        "System Design",
+        "Distributed Systems",
+        "API Design"
+      ]
+    },
+    "soft_skills": [
+      "Problem Solving",
+      "Analytical Thinking",
+      "Communication",
+      "Team Collaboration",
+      "Adaptability",
+      "Time Management"
+    ]
   },
   "projects": [
     {
@@ -25,56 +120,56 @@ const professionalContext = {
           "External context (documents, APIs)"
         ],
         "processing_pipeline": [
-          "1. Interpret user intent using LLM",
-          "2. Decompose task into subtasks",
-          "3. Select appropriate agents for each subtask",
-          "4. Retrieve context using vector search (RAG)",
-          "5. Execute tools (APIs, DB queries, functions)",
-          "6. Run tasks in parallel or sequential flow",
-          "7. Aggregate intermediate outputs",
-          "8. Generate final response"
+          "1. Intent understanding using LLM",
+          "2. Task decomposition into subtasks",
+          "3. Agent selection based on task type",
+          "4. Context retrieval via vector search (RAG)",
+          "5. Tool execution (APIs, DB queries)",
+          "6. Parallel/Sequential task execution",
+          "7. Intermediate result aggregation",
+          "8. Final response synthesis"
         ],
         "output": [
-          "Final structured response",
-          "Tool execution results",
-          "Updated memory/context"
+          "Structured response",
+          "Tool execution logs",
+          "Updated memory context"
         ]
       },
       "decision_logic": [
-        "Agent selection based on task type (reasoning vs retrieval vs execution)",
-        "Dynamic tool selection using LLM reasoning",
-        "Fallback handling when tool fails or returns incomplete data",
-        "Context prioritization using semantic similarity"
+        "Dynamic agent selection (reasoning, retrieval, execution)",
+        "Tool selection via LLM reasoning",
+        "Fallback strategies for tool failures",
+        "Semantic prioritization of context"
       ],
       "architecture_components": {
-        "orchestrator": "Controls task flow, decomposition, and coordination between agents",
+        "orchestrator": "Controls workflow, decomposition, and coordination",
         "agents": [
-          "Reasoning Agent (planning and decomposition)",
-          "Retrieval Agent (semantic search)",
-          "Execution Agent (tool usage)"
+          "Reasoning Agent",
+          "Retrieval Agent",
+          "Execution Agent"
         ],
-        "memory": "Vector database for semantic retrieval and persistent context",
-        "tool_layer": "Pluggable tools (APIs, DB, external services)",
-        "execution_engine": "Async pipeline supporting parallel and sequential tasks"
+        "memory": "Vector DB for semantic retrieval and persistence",
+        "tool_layer": "Pluggable APIs, DB queries, external integrations",
+        "execution_engine": "Async pipeline with parallel + sequential support"
       },
       "data_flow": [
-        "User Input → Orchestrator → Agents → Tools/Memory → Aggregation → Response"
+        "User → Orchestrator → Agents → Tools/Memory → Aggregation → Response"
       ],
       "constraints_and_tradeoffs": [
-        "Latency vs accuracy in multi-step reasoning",
+        "Latency vs reasoning depth",
         "Token cost due to multi-agent communication",
-        "Consistency of memory retrieval vs speed",
-        "Complex orchestration vs maintainability"
+        "Memory accuracy vs retrieval speed",
+        "System complexity vs maintainability"
       ],
       "failure_handling": [
-        "Retry logic for tool failures",
-        "Fallback to LLM-only response when tools fail",
-        "Partial result aggregation if some agents fail"
+        "Retry mechanisms",
+        "LLM fallback responses",
+        "Partial result aggregation"
       ],
       "observability": [
-        "Logging agent decisions",
-        "Tracking tool calls",
-        "Monitoring execution latency"
+        "Agent decision logs",
+        "Tool call tracking",
+        "Latency monitoring"
       ],
       "tech": [
         "LangGraph",
@@ -90,33 +185,33 @@ const professionalContext = {
     {
       "title": "Gravity Edits",
       "type": "AI Video Editing System",
-      "problem_statement": "Manual video editing is time-consuming and requires technical expertise.",
-      "solution": "Developed a two-stage AI pipeline (Inspector-Director) to convert natural language prompts into executable video editing workflows.",
+      "problem_statement": "Manual video editing is slow and requires expertise.",
+      "solution": "Built a dual-agent pipeline (Inspector + Director) to convert natural language instructions into executable video editing workflows.",
       "system_design": {
         "input": [
           "User prompt",
           "Video file"
         ],
         "processing_pipeline": [
-          "1. Inspector analyzes video (scene detection, objects)",
-          "2. Director converts user intent into structured editing plan",
-          "3. Generate editing instructions",
-          "4. Execute edits using FFmpeg"
+          "1. Video analysis (scene/object detection)",
+          "2. Intent-to-plan conversion",
+          "3. Editing instruction generation",
+          "4. Execution via FFmpeg pipeline"
         ],
         "output": [
           "Edited video",
-          "Structured editing steps"
+          "Structured editing plan"
         ]
       },
       "decision_logic": [
-        "Mapping user intent to editing operations",
-        "Selecting relevant video segments",
-        "Determining edit sequence"
+        "Mapping natural language to edit operations",
+        "Segment selection",
+        "Edit sequencing"
       ],
       "constraints_and_tradeoffs": [
-        "Processing time for large videos",
-        "Accuracy of scene understanding",
-        "Balancing automation vs user control"
+        "Processing time vs video size",
+        "Scene understanding accuracy",
+        "Automation vs manual control"
       ],
       "tech": [
         "Gemini 2.5 Pro",
@@ -128,29 +223,29 @@ const professionalContext = {
     {
       "title": "VirBoard",
       "type": "Real-Time Computer Vision Interaction System",
-      "problem_statement": "Traditional input devices limit natural interaction for writing and drawing.",
-      "solution": "Built a gesture-controlled virtual writing system using real-time hand tracking.",
+      "problem_statement": "Traditional input devices limit natural interaction.",
+      "solution": "Gesture-controlled virtual drawing system using real-time hand tracking.",
       "system_design": {
         "input": [
-          "Webcam video stream"
+          "Webcam stream"
         ],
         "processing_pipeline": [
-          "1. Detect hand landmarks using MediaPipe",
-          "2. Track finger positions",
-          "3. Map gestures to drawing coordinates",
-          "4. Render strokes on virtual canvas"
+          "1. Hand landmark detection",
+          "2. Finger tracking",
+          "3. Gesture-to-coordinate mapping",
+          "4. Canvas rendering"
         ],
         "output": [
-          "Real-time drawing interface"
+          "Interactive drawing interface"
         ]
       },
       "decision_logic": [
-        "Gesture classification based on finger positions",
-        "Noise filtering for stable tracking"
+        "Gesture classification",
+        "Noise filtering"
       ],
       "constraints_and_tradeoffs": [
-        "Latency vs accuracy in tracking",
-        "Sensitivity to lighting conditions",
+        "Latency vs accuracy",
+        "Lighting sensitivity",
         "Hardware limitations"
       ],
       "tech": [
@@ -163,67 +258,66 @@ const professionalContext = {
     {
       "title": "VidLingo",
       "type": "Speech Recognition + Translation System",
-      "problem_statement": "Manual subtitle creation is slow and does not scale across languages.",
-      "solution": "Built an automated pipeline for subtitle generation, translation, and synchronization.",
+      "problem_statement": "Manual subtitle creation is slow and not scalable.",
+      "solution": "Automated pipeline for subtitle generation, translation, and synchronization.",
       "system_design": {
         "input": [
-          "Audio or video file"
+          "Audio/Video"
         ],
         "processing_pipeline": [
-          "1. Convert speech to text",
-          "2. Generate timestamps",
-          "3. Translate text into target language",
-          "4. Synchronize subtitles with timeline"
+          "1. Speech-to-text",
+          "2. Timestamp generation",
+          "3. Translation",
+          "4. Subtitle synchronization"
         ],
         "output": [
-          "Subtitle file (SRT)",
+          "SRT files",
           "Multi-language subtitles"
         ]
       },
       "decision_logic": [
         "Language detection",
-        "Translation model selection",
-        "Timestamp alignment strategy"
+        "Model selection",
+        "Alignment strategy"
       ],
       "constraints_and_tradeoffs": [
-        "Accuracy vs speed in transcription",
+        "Accuracy vs speed",
         "Translation quality vs cost",
-        "Synchronization precision"
+        "Sync precision"
       ],
       "tech": [
-        "Google Cloud Speech-to-Text",
-        "Translation API"
+        "Google Speech-to-Text",
+        "Translation APIs"
       ],
       "status": "Completed"
     },
     {
       "title": "TelePort",
       "type": "Android TV Aggregation Platform",
-      "problem_statement": "Fragmented OTT platforms make content discovery inefficient.",
-      "solution": "Created a unified Android TV launcher aggregating multiple OTT services with deep link optimization.",
+      "problem_statement": "Fragmented OTT ecosystem reduces content discoverability.",
+      "solution": "Unified Android TV launcher with deep-link optimization.",
       "system_design": {
         "input": [
-          "User navigation input"
+          "User navigation"
         ],
         "processing_pipeline": [
-          "1. Fetch content metadata",
-          "2. Resolve deep links",
-          "3. Render UI for TV interface"
+          "1. Metadata aggregation",
+          "2. Deep link resolution",
+          "3. UI rendering"
         ],
         "output": [
-          "Unified content dashboard",
+          "Unified dashboard",
           "Direct playback navigation"
         ]
       },
       "constraints_and_tradeoffs": [
-        "Handling inconsistent deep link formats",
-        "UI performance on TV devices",
-        "Content aggregation latency"
+        "Deep link inconsistency",
+        "UI performance",
+        "Latency"
       ],
       "tech": [
         "Android TV",
-        "Deep Linking",
-        "UI/UX"
+        "Deep Linking"
       ],
       "status": "Under Progress"
     }

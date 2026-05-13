@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Search, X, Sparkles, Send, Command } from 'lucide-react';
+import { Search, X, Sparkles, Send, Command, Square } from 'lucide-react';
 
 interface SearchOverlayProps {
   isOpen: boolean;
@@ -146,9 +146,10 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose })
                   </div>
                   <button 
                     type="submit"
-                    className={`p-2 rounded-full transition-all ${query.trim() ? 'bg-electric-blue text-black scale-100' : 'bg-white/5 text-white/20 scale-90'}`}
+                    disabled={isLoading || !query.trim()}
+                    className={`p-2 rounded-full transition-all flex items-center justify-center w-9 h-9 ${query.trim() || isLoading ? 'bg-electric-blue text-black scale-100' : 'bg-white/5 text-white/20 scale-90'}`}
                   >
-                    <Send size={18} />
+                    {isLoading ? <Square fill="currentColor" size={12} className="animate-pulse" /> : <Send size={16} className="ml-0.5" />}
                   </button>
                   <button 
                     type="button"

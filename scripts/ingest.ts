@@ -33,6 +33,14 @@ async function ingest() {
     content: `Profile Name: ${data.profile.name}\nRole: ${data.profile.role}\nLocation: ${data.profile.location}\nSummary: ${data.profile.summary}`,
   });
 
+  // Current Status / FAQ Chunk
+  const currentProjects = data.projects.filter((p: any) => p.status === 'Under Progress').map((p: any) => p.title).join(', ');
+  chunks.push({
+    id: 'current_status',
+    type: 'status',
+    content: `Current Status (What he is doing right now / currently working on): Right now, Sai Eshwar is studying ${data.education[0].degree} at ${data.education[0].institution}. He is currently working on the following active projects: ${currentProjects}. He is available for AI Engineering roles.`,
+  });
+
   // Experience Chunks
   data.experience.forEach((exp: any, i: number) => {
     chunks.push({
@@ -63,7 +71,7 @@ async function ingest() {
     chunks.push({
       id: `project_${proj.title.replace(/\s+/g, '_').toLowerCase()}`,
       type: 'project',
-      content: `Project: ${proj.title} (${proj.status})\nType: ${proj.type}\nProblem: ${proj.problem_statement}\nSolution: ${proj.solution}\nTechnologies: ${proj.tech.join(', ')}`,
+      content: `Project: ${proj.title} (Status: ${proj.status}${proj.status === 'Under Progress' ? ' - Currently working on this now' : ''})\nType: ${proj.type}\nProblem: ${proj.problem_statement}\nSolution: ${proj.solution}\nTechnologies: ${proj.tech.join(', ')}`,
       metadata: { title: proj.title }
     });
   });

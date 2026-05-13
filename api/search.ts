@@ -1,337 +1,50 @@
 import { Groq } from 'groq-sdk';
+import { pipeline, env } from '@xenova/transformers';
+import path from 'path';
+import fs from 'fs';
+
+// Configuration for @xenova/transformers in a serverless environment
+env.allowLocalModels = false;
+env.useBrowserCache = false;
 
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY || '',
 });
 
-const professionalContext = {
-  "profile": {
-    "name": "Rampelli Sai Eshwar",
-    "role": "AI Systems Engineer (LLMs, Computer Vision, Distributed Systems)",
-    "location": "Hyderabad, India",
-    "tagline": "Designs autonomous AI systems using multi-agent orchestration, real-time pipelines, and scalable backend architectures.",
-    "availability": "Available for AI Engineering Roles",
-    "summary": "AI/ML Engineer specializing in LLM-driven systems, multi-agent orchestration, and real-time computer vision pipelines. Experienced in building production-grade AI applications including requirement-generation agents, video intelligence systems, and distributed AI architectures with strong focus on scalability, reliability, and optimization."
-  },
-  "experience": [
-    {
-      "role": "AI/ML Engineer Intern",
-      "company": "0101 Digitall",
-      "duration": "Dec 2024 – Mar 2025",
-      "work": [
-        "Built a Requirements Agent using LangChain that converts ambiguous client ideas into structured software requirements (user stories, acceptance criteria).",
-        "Developed a real-time horse movement analysis system using computer vision with visual overlays for training feedback.",
-        "Optimized deep learning models for real-time inference, improving latency and stability in video processing pipelines."
-      ]
-    }
-  ],
-  "education": [
-    {
-      "degree": "Minor in Artificial Intelligence",
-      "institution": "Indian Institute of Technology (IIT), Ropar",
-      "duration": "Jan 2025 – Jan 2026",
-      "details": [
-        "Focused on AI systems, machine learning theory, and applied deep learning.",
-        "Worked on real-world AI projects involving computer vision and intelligent systems."
-      ]
-    },
-    {
-      "degree": "Bachelor of Technology (B.Tech)",
-      "institution": "Kamala Institute of Technology and Science",
-      "duration": "Aug 2020 – Jul 2024",
-      "details": [
-        "Major in Computer Science and Engineering.",
-        "Built foundational knowledge in data structures, algorithms, and system design."
-      ]
-    }
-  ],
-  "certifications": [
-    {
-      "name": "Full Stack Web Development Hackathon (48-Hour Challenge)",
-      "provider": "Brainovision",
-      "type": "Hackathon"
-    },
-    {
-      "name": "Analyzing and Visualizing Data with Microsoft Power BI",
-      "provider": "Skill Nation",
-      "type": "Data Analysis"
-    },
-    {
-      "name": "Linux Fundamentals & Command Line Basics",
-      "provider": "Cybrary",
-      "type": "System Administration"
-    }
-  ],
-  "skills": {
-    "technical": {
-      "ai_ml": [
-        "Deep Learning (CNNs, Transfer Learning, Fine-tuning, Quantization)",
-        "Agent-based Systems (LangChain, Multi-Agent Orchestration)",
-        "Prompt Engineering",
-        "Model Optimization"
-      ],
-      "computer_vision": [
-        "Object Detection (YOLO, SSD)",
-        "Real-time Video Processing",
-        "OpenCV, MediaPipe"
-      ],
-      "frameworks_tools": [
-        "PyTorch",
-        "TensorFlow",
-        "FastAPI",
-        "Django",
-        "LangGraph",
-        "FFmpeg",
-        "Docker",
-        "Redis",
-        "PostgreSQL",
-        "Vector Databases"
-      ],
-      "programming": [
-        "Python",
-        "SQL"
-      ],
-      "core_concepts": [
-        "Data Structures & Algorithms",
-        "System Design",
-        "Distributed Systems",
-        "API Design"
-      ]
-    },
-    "soft_skills": [
-      "Problem Solving",
-      "Analytical Thinking",
-      "Communication",
-      "Team Collaboration",
-      "Adaptability",
-      "Time Management"
-    ]
-  },
-  "projects": [
-    {
-      "title": "Barney",
-      "type": "Multi-Agent AI Orchestration System",
-      "problem_statement": "Single-LLM systems struggle with complex multi-step tasks due to lack of planning, memory, and tool integration.",
-      "solution": "Built a modular multi-agent system that decomposes tasks, assigns them to specialized agents, and executes them using tools and memory-aware reasoning.",
-      "system_design": {
-        "input": [
-          "User query",
-          "Conversation history",
-          "External context (documents, APIs)"
-        ],
-        "processing_pipeline": [
-          "1. Intent understanding using LLM",
-          "2. Task decomposition into subtasks",
-          "3. Agent selection based on task type",
-          "4. Context retrieval via vector search (RAG)",
-          "5. Tool execution (APIs, DB queries)",
-          "6. Parallel/Sequential task execution",
-          "7. Intermediate result aggregation",
-          "8. Final response synthesis"
-        ],
-        "output": [
-          "Structured response",
-          "Tool execution logs",
-          "Updated memory context"
-        ]
-      },
-      "decision_logic": [
-        "Dynamic agent selection (reasoning, retrieval, execution)",
-        "Tool selection via LLM reasoning",
-        "Fallback strategies for tool failures",
-        "Semantic prioritization of context"
-      ],
-      "architecture_components": {
-        "orchestrator": "Controls workflow, decomposition, and coordination",
-        "agents": [
-          "Reasoning Agent",
-          "Retrieval Agent",
-          "Execution Agent"
-        ],
-        "memory": "Vector DB for semantic retrieval and persistence",
-        "tool_layer": "Pluggable APIs, DB queries, external integrations",
-        "execution_engine": "Async pipeline with parallel + sequential support"
-      },
-      "data_flow": [
-        "User → Orchestrator → Agents → Tools/Memory → Aggregation → Response"
-      ],
-      "constraints_and_tradeoffs": [
-        "Latency vs reasoning depth",
-        "Token cost due to multi-agent communication",
-        "Memory accuracy vs retrieval speed",
-        "System complexity vs maintainability"
-      ],
-      "failure_handling": [
-        "Retry mechanisms",
-        "LLM fallback responses",
-        "Partial result aggregation"
-      ],
-      "observability": [
-        "Agent decision logs",
-        "Tool call tracking",
-        "Latency monitoring"
-      ],
-      "tech": [
-        "LangGraph",
-        "Python",
-        "FastAPI",
-        "Redis",
-        "PostgreSQL",
-        "Vector Databases",
-        "Docker"
-      ],
-      "status": "Under Progress"
-    },
-    {
-      "title": "Gravity Edits",
-      "type": "AI Video Editing System",
-      "problem_statement": "Manual video editing is slow and requires expertise.",
-      "solution": "Built a dual-agent pipeline (Inspector + Director) to convert natural language instructions into executable video editing workflows.",
-      "system_design": {
-        "input": [
-          "User prompt",
-          "Video file"
-        ],
-        "processing_pipeline": [
-          "1. Video analysis (scene/object detection)",
-          "2. Intent-to-plan conversion",
-          "3. Editing instruction generation",
-          "4. Execution via FFmpeg pipeline"
-        ],
-        "output": [
-          "Edited video",
-          "Structured editing plan"
-        ]
-      },
-      "decision_logic": [
-        "Mapping natural language to edit operations",
-        "Segment selection",
-        "Edit sequencing"
-      ],
-      "constraints_and_tradeoffs": [
-        "Processing time vs video size",
-        "Scene understanding accuracy",
-        "Automation vs manual control"
-      ],
-      "tech": [
-        "Gemini 2.5 Pro",
-        "FastAPI",
-        "FFmpeg"
-      ],
-      "status": "Completed"
-    },
-    {
-      "title": "VirBoard",
-      "type": "Real-Time Computer Vision Interaction System",
-      "problem_statement": "Traditional input devices limit natural interaction.",
-      "solution": "Gesture-controlled virtual drawing system using real-time hand tracking.",
-      "system_design": {
-        "input": [
-          "Webcam stream"
-        ],
-        "processing_pipeline": [
-          "1. Hand landmark detection",
-          "2. Finger tracking",
-          "3. Gesture-to-coordinate mapping",
-          "4. Canvas rendering"
-        ],
-        "output": [
-          "Interactive drawing interface"
-        ]
-      },
-      "decision_logic": [
-        "Gesture classification",
-        "Noise filtering"
-      ],
-      "constraints_and_tradeoffs": [
-        "Latency vs accuracy",
-        "Lighting sensitivity",
-        "Hardware limitations"
-      ],
-      "tech": [
-        "OpenCV",
-        "MediaPipe",
-        "Python"
-      ],
-      "status": "Completed"
-    },
-    {
-      "title": "VidLingo",
-      "type": "Speech Recognition + Translation System",
-      "problem_statement": "Manual subtitle creation is slow and not scalable.",
-      "solution": "Automated pipeline for subtitle generation, translation, and synchronization.",
-      "system_design": {
-        "input": [
-          "Audio/Video"
-        ],
-        "processing_pipeline": [
-          "1. Speech-to-text",
-          "2. Timestamp generation",
-          "3. Translation",
-          "4. Subtitle synchronization"
-        ],
-        "output": [
-          "SRT files",
-          "Multi-language subtitles"
-        ]
-      },
-      "decision_logic": [
-        "Language detection",
-        "Model selection",
-        "Alignment strategy"
-      ],
-      "constraints_and_tradeoffs": [
-        "Accuracy vs speed",
-        "Translation quality vs cost",
-        "Sync precision"
-      ],
-      "tech": [
-        "Google Speech-to-Text",
-        "Translation APIs"
-      ],
-      "status": "Completed"
-    },
-    {
-      "title": "TelePort",
-      "type": "Android TV Aggregation Platform",
-      "problem_statement": "Fragmented OTT ecosystem reduces content discoverability.",
-      "solution": "Unified Android TV launcher with deep-link optimization.",
-      "system_design": {
-        "input": [
-          "User navigation"
-        ],
-        "processing_pipeline": [
-          "1. Metadata aggregation",
-          "2. Deep link resolution",
-          "3. UI rendering"
-        ],
-        "output": [
-          "Unified dashboard",
-          "Direct playback navigation"
-        ]
-      },
-      "constraints_and_tradeoffs": [
-        "Deep link inconsistency",
-        "UI performance",
-        "Latency"
-      ],
-      "tech": [
-        "Android TV",
-        "Deep Linking"
-      ],
-      "status": "Under Progress"
-    }
-  ]
-};
+// We load the vector store
+const vectorStorePath = path.join(process.cwd(), 'src/data/vector_store.json');
+let vectorStore: any[] | null = null;
+try {
+  if (fs.existsSync(vectorStorePath)) {
+    vectorStore = JSON.parse(fs.readFileSync(vectorStorePath, 'utf8'));
+  }
+} catch (e) {
+  console.error("Failed to load vector store", e);
+}
+
+// Global variable to hold the extractor to reuse across requests
+let extractor: any = null;
+
+// Cosine similarity utility
+function cosineSimilarity(a: number[], b: number[]) {
+  let dotProduct = 0;
+  let normA = 0;
+  let normB = 0;
+  for (let i = 0; i < a.length; i++) {
+    dotProduct += a[i] * b[i];
+    normA += a[i] * a[i];
+    normB += b[i] * b[i];
+  }
+  return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+}
 
 export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // 1. Check for API Key
   if (!process.env.GROQ_API_KEY) {
-    console.error('MISSING_API_KEY: GROQ_API_KEY is not defined in Vercel environment variables.');
+    console.error('MISSING_API_KEY: GROQ_API_KEY is not defined.');
     return res.status(500).json({
       error: 'AI System Offline',
       details: 'GROQ_API_KEY is missing from server environment.'
@@ -345,6 +58,35 @@ export default async function handler(req: any, res: any) {
   }
 
   try {
+    // 1. Initialize extractor if not already
+    if (!extractor) {
+      console.log('Loading embedding model...');
+      extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+    }
+
+    // 2. Generate embedding for query
+    const output = await extractor(query, { pooling: 'mean', normalize: true });
+    const queryEmbedding = Array.from(output.data) as number[];
+
+    // 3. Find top 3 chunks
+    if (!vectorStore) {
+      throw new Error("Vector store not initialized or missing.");
+    }
+
+    const scoredChunks = vectorStore.map(chunk => ({
+      ...chunk,
+      score: cosineSimilarity(queryEmbedding, chunk.embedding)
+    }));
+
+    // Sort descending by score
+    scoredChunks.sort((a, b) => b.score - a.score);
+    const topChunks = scoredChunks.slice(0, 3);
+    
+    const contextContent = topChunks.map(c => c.content).join('\n\n---\n\n');
+
+    console.log(`Top chunks retrieved for query "${query}":`, topChunks.map(c => c.id));
+
+    // 4. Send to LLM
     const chatCompletion = await groq.chat.completions.create({
       messages: [
         {
@@ -352,14 +94,13 @@ export default async function handler(req: any, res: any) {
           content: `You are the AI version of Rampelli Sai Eshwar's portfolio. 
           Your goal is to answer questions about Sai Eshwar's professional experience, projects, and skills.
           
-          USE ONLY THE FOLLOWING CONTEXT:
-          ${JSON.stringify(professionalContext, null, 2)}
+          USE ONLY THE FOLLOWING RETRIEVED CONTEXT:
+          ${contextContent}
           
           RULES:
-          1. Only answer based on the provided context.
-          2. If the user asks something outside this context, politely say: "I'm sorry, I'm specifically trained on Sai Eshwar's professional background. I don't have information on that topic."
-          3. Be professional, concise, and helpful.
-          4. Format your response with markdown for readability.`
+          1. Only answer based on the provided context. If the answer is not in the context, politely say you don't have information on that topic.
+          2. Be professional, concise, and helpful.
+          3. Format your response with markdown for readability.`
         },
         {
           role: 'user',
@@ -374,12 +115,7 @@ export default async function handler(req: any, res: any) {
     const responseText = chatCompletion.choices[0]?.message?.content || "I couldn't generate a response.";
     return res.status(200).json({ response: responseText });
   } catch (error: any) {
-    console.error('Groq API Error Details:', {
-      message: error.message,
-      stack: error.stack,
-      status: error.status,
-      name: error.name
-    });
+    console.error('API Error Details:', error);
     return res.status(500).json({
       error: 'Failed to process search query',
       details: error.message

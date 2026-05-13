@@ -100,8 +100,8 @@ export default async function handler(req: any, res: any) {
           RULES:
           1. The retrieved context contains his most up-to-date and current information. Treat all 'Under Progress' projects or recent experiences as what he is currently doing.
           2. Only answer based on the provided context. If the answer is not in the context, politely say you don't have information on that topic.
-          3. Be professional, concise, and helpful.
-          4. Format your response with markdown for readability.`
+          3. Speak in a natural, conversational, one-on-one tone, as if you are chatting directly with the visitor.
+          4. DO NOT use markdown headers (like ###) or bullet points. Write your answers as neat, flowing sentences.`
         },
         {
           role: 'user',

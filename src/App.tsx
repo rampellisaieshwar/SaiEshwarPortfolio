@@ -249,11 +249,14 @@ export default function App() {
                   className="w-full h-full object-cover rounded-full filter contrast-110 brightness-110 grayscale group-hover:grayscale-0 transition-all duration-700"
                 />
               </div>
-              {/* Identity Tag */}
-              <div className="absolute -bottom-2 -right-4 px-3 py-1 rounded-full glass text-[8px] font-mono text-electric-blue border border-electric-blue/20 flex items-center gap-1.5 shadow-lg">
-                <div className="w-1 h-1 rounded-full bg-electric-blue animate-pulse" />
-                ID: RSE-2026
-              </div>
+              {/* Interactive Ask Mini-Me Tag */}
+              <button 
+                onClick={() => setShowSearch(true)}
+                className="absolute -bottom-2 -right-6 px-4 py-1.5 rounded-full glass text-[10px] font-bold text-white border border-electric-blue/30 flex items-center gap-2 shadow-[0_0_15px_rgba(0,210,255,0.3)] hover:bg-electric-blue hover:text-black transition-all duration-300 group/btn z-10"
+              >
+                <Sparkles size={12} className="text-electric-blue group-hover/btn:text-black group-hover/btn:animate-spin" />
+                Ask Mini-Me
+              </button>
             </motion.div>
 
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-[10px] font-mono uppercase tracking-[0.2em] text-white/50 mb-8">

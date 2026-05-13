@@ -84,13 +84,13 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose })
                   <Sparkles size={20} className="animate-pulse" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-mono text-white/40 uppercase tracking-widest mb-2">System Intelligence</h3>
+                  <h3 className="text-sm font-mono text-electric-blue uppercase tracking-widest mb-2 font-bold">Sai Eshwar (Mini-Me)</h3>
                   <div className="text-white/80 leading-relaxed max-h-[40vh] overflow-y-auto no-scrollbar">
                     {isLoading ? (
                       <div className="space-y-4">
                         <p className="animate-pulse flex items-center gap-2">
                           <span className="w-2 h-2 rounded-full bg-electric-blue animate-ping" />
-                          Analyzing professional query: "{query}"...
+                          Analyzing your query: "{query}"...
                         </p>
                         <div className="h-4 w-3/4 bg-white/5 rounded animate-pulse" />
                         <div className="h-4 w-1/2 bg-white/5 rounded animate-pulse" />
@@ -135,7 +135,7 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose })
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Ask anything about my experience..."
+                  placeholder="Ask me anything about my experience..."
                   className="bg-transparent border-none outline-none flex-1 text-white placeholder:text-white/20 font-sans"
                 />
                 
